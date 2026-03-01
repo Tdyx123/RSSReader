@@ -1,0 +1,148 @@
+# ===========================
+# 编译输出
+# ===========================
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+[Bb]uildLog/
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.sbr
+*.suo
+*.aps
+*.idb
+*.exp
+*.res
+*.rsc
+*.tlb
+
+# ===========================
+# Visual Studio
+# ===========================
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vs/
+*.vssscc
+*.vspscc
+*.builds
+*.pidb
+*.log
+*.tlog
+*.cache
+*.vsconfig
+*.sln.ide
+Project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ===========================
+# Visual Studio Code
+# ===========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# ===========================
+# JetBrains Rider / ReSharper
+# ===========================
+*.sln.iml
+*.sln.DotSettings.user
+*.csproj.DotSettings.user
+_ReSharper*/
+*.resharper
+*.nunit
+*.DotSettings.user
+
+# ===========================
+# NuGet
+# ===========================
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+packages.lock.json
+
+# ===========================
+# .NET Core / SDK
+# ===========================
+project.assets.json
+project.lock.json
+*.dgml
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.msixupload
+AppPackages/
+BundleArtifacts/
+*_Package_*
+Publish/
+
+# ===========================
+# 测试相关
+# ===========================
+TestResults/
+[Tt]est[Rr]esult*/
+*.coverage
+*.coveragexml
+coverage/
+*.nunit
+*.trx
+
+# ===========================
+# 日志与临时文件
+# ===========================
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+Thumbs.db
+Desktop.ini
+
+# ===========================
+# 用户特定配置
+# ===========================
+*.user
+*.suo
+*.vs/
+.vs/
+
+# ===========================
+# 其他常见忽略项
+# ===========================
+*.dll
+*.exe
+*.xml
+*.manifest
+*.resx
+*.cache
+*.log
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE
+!CONTRIBUTING.md
