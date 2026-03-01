@@ -55,6 +55,9 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _newFeedCategory = string.Empty;
 
+    [ObservableProperty]
+    private bool _isWebViewVisible;
+
     public MainViewModel()
     {
         LoadFeeds();
@@ -109,6 +112,18 @@ public partial class MainViewModel : ObservableObject
         foreach (var article in articles)
         {
             Articles.Add(article);
+        }
+    }
+
+    partial void OnSelectedArticleChanged(Article? value)
+    {
+        if (value != null)
+        {
+            IsWebViewVisible = true;
+        }
+        else
+        {
+            IsWebViewVisible = false;
         }
     }
 

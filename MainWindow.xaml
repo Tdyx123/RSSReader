@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RSSReader"
         xmlns:vm="clr-namespace:RSSReader.ViewModels"
+        xmlns:views="clr-namespace:RSSReader.Views"
         mc:Ignorable="d"
         Title="RSS Reader - AI 智能阅读器"
         Height="750" Width="1200"
@@ -17,6 +19,7 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <local:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVis"/>
 
         <Style x:Key="CardStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
@@ -284,45 +287,53 @@
 
                     <!-- Articles Tab -->
                     <TabItem Header="📰 文章列表">
-                        <ListBox ItemsSource="{Binding Articles}"
-                                 SelectedItem="{Binding SelectedArticle}"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Style="{StaticResource CardStyle}" Margin="0,4">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
+                        <Grid>
+                            <ListBox ItemsSource="{Binding Articles}"
+                                     SelectedItem="{Binding SelectedArticle}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     Visibility="{Binding IsWebViewVisible, Converter={StaticResource InverseBoolToVis}}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource CardStyle}" Margin="0,4">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
 
-                                            <TextBlock Grid.Row="0" Text="{Binding Title}"
-                                                       FontWeight="SemiBold" Foreground="#1F2937"
-                                                       TextTrimming="CharacterEllipsis" FontSize="14"/>
+                                                <TextBlock Grid.Row="0" Text="{Binding Title}"
+                                                           FontWeight="SemiBold" Foreground="#1F2937"
+                                                           TextTrimming="CharacterEllipsis" FontSize="14"/>
 
-                                            <TextBlock Grid.Row="1" Text="{Binding Description}"
-                                                       Foreground="#6B7280" TextWrapping="Wrap"
-                                                       MaxHeight="60" TextTrimming="CharacterEllipsis"
-                                                       Margin="0,8,0,0"/>
+                                                <TextBlock Grid.Row="1" Text="{Binding Description}"
+                                                           Foreground="#6B7280" TextWrapping="Wrap"
+                                                           MaxHeight="60" TextTrimming="CharacterEllipsis"
+                                                           Margin="0,8,0,0"/>
 
-                                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
-                                                <TextBlock Text="{Binding PublishDate, StringFormat='{}{0:MM/dd}'}"
-                                                           FontSize="11" Foreground="#9CA3AF"/>
-                                                <TextBlock Text=" | " Foreground="#E5E7EB"/>
-                                                <TextBlock Text="{Binding Feed.Title}" FontSize="11" Foreground="#9CA3AF"/>
-                                                <TextBlock Text=" | " Foreground="#E5E7EB" 
-                                                           Visibility="{Binding IsStarred, Converter={StaticResource BoolToVis}}"/>
-                                                <TextBlock Text="⭐" Foreground="#FBBF24" 
-                                                           Visibility="{Binding IsStarred, Converter={StaticResource BoolToVis}}"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
+                                                    <TextBlock Text="{Binding PublishDate, StringFormat='{}{0:MM/dd}'}"
+                                                               FontSize="11" Foreground="#9CA3AF"/>
+                                                    <TextBlock Text=" | " Foreground="#E5E7EB"/>
+                                                    <TextBlock Text="{Binding Feed.Title}" FontSize="11" Foreground="#9CA3AF"/>
+                                                    <TextBlock Text=" | " Foreground="#E5E7EB" 
+                                                               Visibility="{Binding IsStarred, Converter={StaticResource BoolToVis}}"/>
+                                                    <TextBlock Text="⭐" Foreground="#FBBF24" 
+                                                               Visibility="{Binding IsStarred, Converter={StaticResource BoolToVis}}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <views:ArticleWebViewPanel 
+                                Visibility="{Binding IsWebViewVisible, Converter={StaticResource BoolToVis}}"
+                                Article="{Binding SelectedArticle}"
+                                BackRequested="WebViewPanel_BackRequested"/>
+                        </Grid>
                     </TabItem>
 
                     <!-- Event Line Tab -->
